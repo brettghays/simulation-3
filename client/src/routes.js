@@ -1,17 +1,17 @@
 import React from 'react';
 import {HashRouter as Router, Route} from 'react-router-dom';
-import authview from './Components/AuthView/authview';
-import dashboard from './Components/Dashboard/dashboard';
-import search from './Components/Search/search';
-import profile from './Components/Profile/profile';
+import AuthView from './Components/AuthView/authview';
+import Dashboard from './Components/Dashboard/dashboard';
+import Search from './Components/Search/search';
+import Profile from './Components/Profile/profile';
 
 export default (
     <Router>
         <div>
-            <Route exact path = '/' component = {authview} />
-            <Route path = '/dashboard' component = {} />
-            <Route path = '/search' component = {} />
-            <Route path = '/profile' component = {} />
+            <Route exact path = '/' component = {AuthView} />
+            <Route path = '/dashboard' component = {Dashboard} />
+            <Route path = '/search' component = {Search} />
+            <Route path = '/profile' component = {Profile} />
         </div>
     </Router>
 );
