@@ -7,9 +7,11 @@ module.exports = function(req,res,next) {
     console.log(session.user);
     if (!session.user){
         session.user = {
-            username: '',
+            username: 'Brett',
             id: id
         };
+    } else {
+        console.log('session.user exists')
     }
     next();
 }

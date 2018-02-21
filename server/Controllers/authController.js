@@ -9,4 +9,18 @@
     birthday_day INTEGER,
     birthday_month VARCHAR(40),
     birthday_year INTEGER
-); */
+); 
+create table helo_user (
+    helo_id Serial primary key,
+    firstName varchar(40),
+    lastName varchar(40)
+);
+*/
+
+module.exports = {
+    read: (req,res) => {
+        console.log('this is req.user', req.user)
+        console.log('this is req.session.passport.user', req.session.passport.user);
+        res.status(200).send( JSON.stringify( req.user, null, 10 ) );
+    }
+}

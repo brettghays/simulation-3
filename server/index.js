@@ -8,7 +8,7 @@ const path = require('path');
 
 const strategy = require('./strategy');
 const checkForSession = require('./middlewares/checkForSession');
-
+const ac = require('./Controllers/authController');
 
 require('dotenv').config();
 
@@ -26,12 +26,12 @@ app.use(passport.session());
 passport.use(strategy);
 
 passport.serializeUser((user,done) => {
-    console.log(user)
+    //console.log('user.first')
     done(null,
         {
            id: user.id,
-           firstName: user.firstName || '',
-           lastName: user.lastName || '',
+           firstName: user.first || '',
+           lastName: user.last || '',
            picture: 'https://robohash.org/me'
         });
 });
@@ -43,6 +43,14 @@ passport.deserializeUser((obj,done) => {
 massive(process.env.CONNECTION_STRING)
     .then(dbInstance => app.set('db', dbInstance))
     .catch(err => console.log(err));
+
+app.get( '/api/auth/login', 
+    passport.authenticate('auth0', 
+        { successRedirect: 'http://localhost:3000/#/dashboard', failureRedirect: '/profile', failureFlash: true }
+    )
+);
+
+app.get('/api/auth/setuser', ac.read)
 
 const port = process.env.PORT || 3001;
 app.listen(port, () => {
