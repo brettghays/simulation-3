@@ -10,6 +10,9 @@ const strategy = require('./strategy');
 const checkForSession = require('./middlewares/checkForSession');
 const ac = require('./Controllers/authController');
 
+var corsOptions = {
+    origin: 'http://localhost:3000'
+}
 require('dotenv').config();
 
 const app = express();
@@ -18,15 +21,15 @@ app.use(cors());
 app.use(session({
     secret: "process.env.SECRET_SESSION",
     resave: false,
-    saveUninitialized: true
+    saveUninitialized: true,
 }));
-app.use(checkForSession);
+//app.use(checkForSession);
 app.use(passport.initialize());
 app.use(passport.session());
 passport.use(strategy);
 
 passport.serializeUser((user,done) => {
-    //console.log('user.first')
+    console.log(user)
     done(null,
         {
            id: user.id,
@@ -44,13 +47,26 @@ massive(process.env.CONNECTION_STRING)
     .then(dbInstance => app.set('db', dbInstance))
     .catch(err => console.log(err));
 
-app.get( '/api/auth/login', 
-    passport.authenticate('auth0', 
-        { successRedirect: 'http://localhost:3000/#/dashboard', failureRedirect: '/profile', failureFlash: true }
-    )
-);
+//Authorization Endpoints
+app.get( '/api/auth/login',
+    passport.authenticate('auth0', { 
+        successRedirect: '/api/auth/setUser',
+        failureRedirect: '/profile', 
+        failureFlash: true 
+}));
 
-app.get('/api/auth/setuser', ac.read)
+app.get('/api/auth/setUser', passport.authenticate('auth0'), (req,res) => {
+    console.log(req.session.passport.user);//this gives me what was set on the middleware for user and id
+    res.redirect('http://localhost:3000/#/dashboard')//this works
+});
+
+app.get('/api/auth/authenticated', (req,res) => {
+    if(req.session.passport.user){
+        res.status(200).send(req.session.passport.user)
+    } else {
+        res.status(403)
+    }
+})
 
 const port = process.env.PORT || 3001;
 app.listen(port, () => {

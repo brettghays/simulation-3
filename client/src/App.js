@@ -6,10 +6,8 @@ import './App.css';
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <div className = 'container'>
-          {Routes}
-        </div>
+      <div className = 'App'>
+        {Routes}
       </div>
     );
   }
