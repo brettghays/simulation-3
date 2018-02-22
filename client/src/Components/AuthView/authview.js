@@ -22,7 +22,9 @@ export default class AuthView extends Component {
                     <div className = 'helo'>
                         <h1>Helo</h1>
                     </div>
-                    <button className = 'authButton' onClick={() => this.handleClick()}>Login/Register</button>
+                    <div className="auth0Link">
+                        <a href="http://www.espn.com">Login / Register</a>
+                    </div>
                 </div>
                 
             </div>

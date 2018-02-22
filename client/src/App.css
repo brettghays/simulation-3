@@ -9,6 +9,7 @@
   background-image: linear-gradient(99deg, #ff70a6,#ff9770 40%, #ffd670 73%, #e9ff70);
   position: absolute;
   width: 100vw;
+  height: 100vh;
   top: 0px;
   bottom: 0px;
   display: flex;
@@ -17,14 +18,16 @@
 }
 
 .innerContainer {
-  height: 350px;
-  width: 400px;
+  height: 70%;
+  width: 40%;
   background-image: linear-gradient(97deg, #ff9770, #ffd670);
+  border-radius: 10px;
   box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.1), 0 6px 6px 0 rgba(0, 0, 0, 0.2);
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-around;
   flex-direction: column;
+  
 }
 
 .Helo {
@@ -32,19 +35,42 @@
   display: block;
   font-size: 32px;
   font-weight: 600;
-  margin-top: -40px;
-  margin-bottom: -20px;
+  padding: 0px;
+  margin: 0px;
 }
 
-.authButton {
-  width: 75%;
+.auth0Link {
+  width: 65%;
+  padding-top: 20px;
+  padding-bottom: 20px;
   margin-top: -20px;
+  margin-bottom: 20px;
   font-weight: 400;
   letter-spacing: 1.25px;
-  font-size: 16px;
+  font-size: 2em;
   border: none;
   color: white;
-  border-radius: 1px;
-  background-image: radial-gradient(circle at 46%, #737373, #403d39);
+  border-radius: 6px;
+  background-color: #403D39;
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.2);
+}
+
+a {
+  text-decoration: none;
+  color: white;
+}
+
+h1 {
+  color: white;
+  font-size: 10em;
+}
+
+img {
+  height: 13em;
+  
+}
+
+.logo {
+  margin: 0px;
+  padding: 0px;
 }
