@@ -17,7 +17,7 @@ export default class AuthView extends Component {
             <div className="container">
                 <div className = "innerContainer">
                     <div className = 'logo'>
-                        <img src={logo} alt=""/> 
+                        <img src={logo} alt="logo"/> 
                     </div>
                     <div className = 'helo'>
                         <h1>Helo</h1>

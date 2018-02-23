@@ -10,9 +10,6 @@ const strategy = require('./strategy');
 const checkForSession = require('./middlewares/checkForSession');
 const ac = require('./Controllers/authController');
 
-var corsOptions = {
-    origin: 'http://localhost:3000'
-}
 require('dotenv').config();
 
 const app = express();
