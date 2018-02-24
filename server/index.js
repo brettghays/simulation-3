@@ -7,12 +7,21 @@ const massive = require('massive');
 const path = require('path');
 
 const strategy = require('./strategy');
-const checkForSession = require('./middlewares/checkForSession');
+//const checkForSession = require('./middlewares/checkForSession');
 const ac = require('./Controllers/authController');
+
+const port = process.env.PORT || 3001;
+const app = express();
 
 require('dotenv').config();
 
-const app = express();
+massive(process.env.CONNECTION_STRING)
+    .then(dbInstance => {
+        console.log('this is connected')
+        app.set('db', dbInstance)})
+    .catch(err => console.log(err));
+
+
 app.use(bodyParser.json());
 app.use(cors());
 app.use(session({
@@ -24,6 +33,8 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 passport.use(strategy);
+
+//add in code to connect to zeit
 
 passport.serializeUser((user,done) => {
     console.log(user.name)
@@ -40,10 +51,6 @@ passport.deserializeUser((obj,done) => {
     done(null,obj);
 })
 
-massive(process.env.CONNECTION_STRING)
-    .then(dbInstance => app.set('db', dbInstance))
-    .catch(err => console.log(err));
-
 //Authorization Endpoints
 app.get( '/api/auth/login',
     passport.authenticate('auth0', { 
@@ -52,8 +59,25 @@ app.get( '/api/auth/login',
         failureFlash: true 
 }));
 
-app.get('/api/auth/setUser', passport.authenticate('auth0'), (req,res) => {
-    console.log(req.session.passport.user);//this gives me what was set on the middleware for user and id
+app.get('/api/auth/setUser', passport.authenticate('auth0'), (req,res, done) => {
+    console.log("req.s.p.u",req.session.passport.user);//this gives me what was set on the middleware for user and id
+    let passportUser = req.session.passport.user;
+    const dbInstance = app.get('db');
+
+    dbInstance.User.read_user([passportUser.id])
+        .then(user => {
+            console.log('user: ', user)
+            if(user.length && user[0].user_id){
+                return done(null, user);
+            } else{
+                dbInstance.User.create_user([passportUser.id, 'https://robohash.org/me'])
+                .then(user => {
+                    console.log('User created in db: ',user);
+                    //console.log('profile, ', profile)
+                    return done(null, user)
+                })
+            }
+        })
     res.redirect('http://localhost:3000/#/dashboard')//this works
 });
 
@@ -65,7 +89,7 @@ app.get('/api/auth/authenticated', (req,res) => {
     }
 })
 
-const port = process.env.PORT || 3001;
+
 app.listen(port, () => {
     console.log(`Welcome to the Big Show on ${port}`);
 });

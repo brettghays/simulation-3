@@ -10,7 +10,7 @@
     birthday_month VARCHAR(40),
     birthday_year INTEGER
 ); 
-create table helo_user (
+create table dropped (
     helo_id Serial primary key,
     firstName varchar(40),
     lastName varchar(40)

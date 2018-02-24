@@ -1,0 +1,1 @@
+INSERT INTO users (user_id, picture) VALUES ($1, $2);
