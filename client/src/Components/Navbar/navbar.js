@@ -18,7 +18,13 @@ export default class Navbar extends Component {
     } */
 
     render(){
-        
+        const title = window.location.hash.split('/')[1];
+        let capitalize = (string)  =>
+        {
+            var pagetitle = string.charAt(0).toUpperCase() + string.slice(1);
+            return pagetitle
+        }
+        const pageTitle = capitalize(title)
         return(
             <div className="parent">
                 <div className="child">
@@ -31,7 +37,7 @@ export default class Navbar extends Component {
                             <Link to='/search'><img className = 'dashboard_search' src={search} alt="search"/></Link>
                         </div>
                     </div>
-                    <div className="middle">Dashboard</div>{/*Add capitalize function to state in reducer*/}
+                    <div className="middle">{pageTitle}</div>{/*Add capitalize function to state in reducer*/}
                     <div className="right">
                         Logout
                     </div>
