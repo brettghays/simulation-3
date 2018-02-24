@@ -2,16 +2,12 @@ import React, {Component} from 'react';
 import home from '../../assets/home.png'
 import search from '../../assets/search.png';
 import {Link} from 'react-router-dom';
+import {connect} from 'react-redux';
+//import {updatePageTitle} from '../../Reducer/reducer'
 import './navbar.css'
 
 export default class Navbar extends Component {
-    constructor(){
-        super();
-        this.state = {
-            pageTitle: "Title"
-        }
-    }
-    /* componentDidMount(){
+     /* componentDidMount(){
         let title = window.location.hash.split('/')[1];
         let capitalize = (string)  =>
         {
@@ -45,3 +41,12 @@ export default class Navbar extends Component {
         )
     }
 }
+
+/* let mapStateToProps = state => {
+    const pageTitle = state;
+    return {
+        pageTitle
+    }
+}
+
+export default connect(mapStateToProps, {updatePageTitle})(Navbar) */

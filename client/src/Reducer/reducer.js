@@ -1,13 +1,14 @@
 const initialState = {
-    firstName: "",
-    lastName: "",
+    firstName: "Brett works here",
+    lastName: "Hays",
     gender: "",
     hairColor: "",
     eyeColor: "",
     hobby: "",
     birthdayDay: "",
     birthdayMonth: "",
-    birthdayYear: ""
+    birthdayYear: "",
+    image: "https://robohash.org/me"
 };
 
 const UPDATE_FIRSTNAME = "UPDATE_FIRSTNAME";
@@ -19,6 +20,7 @@ const UPDATE_HOBBY = "UPDATE_HOBBY";
 const UPDATE_BIRTHDAYDAY = "UPDATE_BIRTHDAYDAY";
 const UPDATE_BIRTHDAYMONTH = "UPDATE_BIRTHDAYMONTH";
 const UPDATE_BIRTHDAYYEAR = "UPDATE_BIRTHDAYYEAR";
+//const UPDATE_PAGE_TITLE = "UPDATE_PAGE_TITLE"; 
 
 function reducer(state = initialState, action){
     switch(action.type){
@@ -48,6 +50,9 @@ function reducer(state = initialState, action){
 
         case UPDATE_BIRTHDAYYEAR:
             return Object.assign({}, state, {birthdayYear: action.payload});
+
+        /* case UPDATE_PAGE_TITLE:
+            return Object.assing({}, state, {pageTitle: action.payload}) */
 
         default: return state;    
     }
@@ -107,5 +112,20 @@ export function updateBirthdayYear (birthdayYear) {
         payload: birthdayYear
     }
 }
+
+/* export function updatePageTitle () {
+    let title = window.location.hash.split('/')[1];
+    let capitalize = (string)  =>
+    {
+        var pagetitle = string.charAt(0).toUpperCase() + string.slice(1);
+        return pagetitle
+    }
+    pageTitle = capitalize(title)
+
+    return {
+        type: UPDATE_PAGE_TITLE,
+        payload: pageTitle
+    }
+} */
 
 export default reducer;

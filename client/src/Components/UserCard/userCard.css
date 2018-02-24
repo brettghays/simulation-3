@@ -1,0 +1,9 @@
+.dash-parent {
+    height: 300px;
+    width: 300px;
+    background-color: blue;
+    color: white;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
