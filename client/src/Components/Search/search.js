@@ -18,10 +18,11 @@ export default class Search extends Component {
                             <button className="black_btn">Search</button>
                             <button className="gray_btn">Reset</button>
                         </div>
-                        <div className="search_child_bottom"></div>
+                        <div className="search_child_bottom">
+                            <div className="search_results"></div>
+                        </div>
                     </div>
-                </div>
-                
+                </div>  
             </div>
         )
     }
