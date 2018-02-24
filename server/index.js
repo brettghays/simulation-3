@@ -29,12 +29,12 @@ app.use(passport.session());
 passport.use(strategy);
 
 passport.serializeUser((user,done) => {
-    console.log(user)
+    console.log(user.name)
     done(null,
         {
            id: user.id,
-           firstName: user.first || '',
-           lastName: user.last || '',
+           firstName: user.name.givenName || '',
+           lastName: user.name.familyName || '',
            picture: 'https://robohash.org/me'
         });
 });
