@@ -1,13 +1,13 @@
 const initialState = {
-    firstName: "Brett works here",
-    lastName: "Hays",
-    gender: "",
-    hairColor: "",
-    eyeColor: "",
-    hobby: "",
-    birthdayDay: "",
-    birthdayMonth: "",
-    birthdayYear: "",
+    firstName: "",
+    lastName: "",
+    gender: "-- Select --",
+    hairColor: "-- Select --",
+    eyeColor: "-- Select --",
+    hobby: "-- Select --",
+    birthdayDay: "-- Select --",
+    birthdayMonth: "-- Select --",
+    birthdayYear: "-- Select --",
     image: "https://robohash.org/me"
 };
 
