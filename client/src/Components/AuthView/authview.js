@@ -23,7 +23,7 @@ export default class AuthView extends Component {
                         <h1>Helo</h1>
                     </div>
                     <div className="auth0Link">
-                        <a href="http://www.espn.com">Login / Register</a>
+                        <a href="http://localhost:3001/api/auth/login">Login / Register</a>
                     </div>
                 </div>
                 
